@@ -1,0 +1,51 @@
+# Project: SDLShooter
+# Makefile created by Dev-C++ 5.11
+
+CPP      = g++.exe
+CC       = gcc.exe
+WINDRES  = windres.exe
+RES      = obj/resources.res
+OBJ      = obj/main.o obj/Game.o obj/Scene.o obj/SceneTitle.o obj/SceneMain.o obj/SceneEnd.o obj/SceneHelp.o $(RES)
+LINKOBJ  = obj/main.o obj/Game.o obj/Scene.o obj/SceneTitle.o obj/SceneMain.o obj/SceneEnd.o obj/SceneHelp.o $(RES)
+LIBS     = -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib" -L"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/lib" -static-libgcc -std=c++23 -O3 -Wall -L"deps/lib" -mwindows -lmingw32_ _-lSDL2main_ _-lSDL2_ _-lSDL2_image_ _-lSDL2_mixer_ _-lSDL2_ttf_ _-mwindows_ _
+INCS     = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"deps/include" -I"deps/include/SDL2"
+CXXINCS  = -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/x86_64-w64-mingw32/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include" -I"C:/Program Files (x86)/Dev-Cpp/MinGW64/lib/gcc/x86_64-w64-mingw32/4.9.2/include/c++" -I"deps/include" -I"deps/include/SDL2"
+BIN      = SDLShooter.exe
+CXXFLAGS = $(CXXINCS) -std=c++17_ _
+CFLAGS   = $(INCS) -std=c++17_ _
+RM       = rm.exe -f
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before $(BIN) all-after
+
+clean: clean-custom
+	${RM} $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o $(BIN) $(LIBS)
+
+obj/main.o: src/main.cpp
+	$(CPP) -c src/main.cpp -o obj/main.o $(CXXFLAGS)
+
+obj/Game.o: src/Game.cpp
+	$(CPP) -c src/Game.cpp -o obj/Game.o $(CXXFLAGS)
+
+obj/Scene.o: src/Scene.cpp
+	$(CPP) -c src/Scene.cpp -o obj/Scene.o $(CXXFLAGS)
+
+obj/SceneTitle.o: src/SceneTitle.cpp
+	$(CPP) -c src/SceneTitle.cpp -o obj/SceneTitle.o $(CXXFLAGS)
+
+obj/SceneMain.o: src/SceneMain.cpp
+	$(CPP) -c src/SceneMain.cpp -o obj/SceneMain.o $(CXXFLAGS)
+
+obj/SceneEnd.o: src/SceneEnd.cpp
+	$(CPP) -c src/SceneEnd.cpp -o obj/SceneEnd.o $(CXXFLAGS)
+
+obj/SceneHelp.o: src/SceneHelp.cpp
+	$(CPP) -c src/SceneHelp.cpp -o obj/SceneHelp.o $(CXXFLAGS)
+
+obj/resources.res: resources.rc resources.rc
+	$(WINDRES) -i resources.rc --input-format=rc -o obj/resources.res -O coff 
+
