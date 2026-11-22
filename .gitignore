@@ -1,0 +1,41 @@
+﻿# 编译产物
+*.o
+*.obj
+*.exe
+*.dll
+*.lib
+*.a
+*.so
+*.apk
+
+# 工具链
+obj/
+build/
+build32.bat  # 包含绝对路径，不应分发
+embed_assets.ps1
+resources.h
+
+# IDE/系统
+.vs/
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+
+# 运行时数据
+save.dat
+debug.log
+SDLShooter-实现详解.md
+
+# 内嵌二进制
+obj/assets_data.o
+src/assets_embed.cpp
+
+# 依赖库（太大，用户自己下载）
+deps/
+deps32/
+android-toolchain/
+
+# 构建临时产物
+resources.h
+resources.o
