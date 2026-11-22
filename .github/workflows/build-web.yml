@@ -32,21 +32,23 @@ jobs:
           echo "$PWD/upstream/emscripten" >> $GITHUB_PATH
           echo "$PWD/node/current/bin" >> $GITHUB_PATH
 
-      - name: Verify emcc
-        run: emcc --version
+      - name: Verify em++
+        run: em++ --version
 
       - name: Build WebAssembly
         run: |
           mkdir -p build-web
           cd build-web
-          emcc \
-            -O2 \
+          em++ \
+            -O2 -std=c++17 \
             -s USE_SDL=2 \
             -s USE_SDL_IMAGE=2 \
             -s USE_SDL_MIXER=2 \
             -s USE_SDL_TTF=2 \
             -s SDL2_IMAGE_FORMATS='["png"]' \
             -s SDL2_MIXER_FORMATS='["ogg","wav"]' \
+            -s SDL2_TTF_BUILD_ICU=OFF \
+            -s DEFAULT_TO_CXX=1 \
             -s ALLOW_MEMORY_GROWTH=1 \
             -s INITIAL_MEMORY=100MB \
             -s TOTAL_MEMORY=512MB \
@@ -62,8 +64,7 @@ jobs:
             ../src/SceneEnd.cpp \
             ../src/SceneHelp.cpp \
             ../src/AssetLoader.cpp \
-            ../src/assets_embed.cpp \
-            2>&1
+            ../src/assets_embed.cpp
           ls -la
 
       - name: Upload artifact
@@ -78,6 +79,4 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      - name: Deploy to GitHub
