@@ -48,7 +48,6 @@ jobs:
             -s USE_SDL_TTF=2 \
             -s SDL2_IMAGE_FORMATS='["png"]' \
             -s SDL2_MIXER_FORMATS='["ogg","wav"]' \
-            -s SDL2_TTF_BUILD_ICU=OFF \
             -s DEFAULT_TO_CXX=1 \
             -s ALLOW_MEMORY_GROWTH=1 \
             -s INITIAL_MEMORY=100MB \
